@@ -95,11 +95,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'wineshop',
+        'NAME': 'stockmg',
 
-        'USER': 'pgesu',
+        'USER': 'dhanush',
 
-        'PASSWORD': 'error',
+        'PASSWORD': 'dhanush',
 
         'HOST': '127.0.0.1',
 

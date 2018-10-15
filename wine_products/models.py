@@ -25,6 +25,7 @@ class Product(BaseModel):
 	label_name = models.CharField(blank=True,null=True,max_length=50)
 	products_categorie = models.ForeignKey(Categorie,blank=True,null=True)
 	quantity = models.ForeignKey(Qunatite,blank=True,null=True)
+	price = models.CharField(blank=True,null=True,max_length=50)
 
 	def __str__(self):
 		return '%s' % self.name
