@@ -22,7 +22,8 @@ class Command(BaseCommand):
                 "code":each_row[1],
                 "label_name":each_row[0].capitalize(),
                 "products_categorie":prod_cat,
-                "quantity":quantity
+                "quantity":quantity,
+                "price":each_row[4]
                 }
                 print kwargs
                 Product.objects.create(**kwargs)

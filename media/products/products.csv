@@ -1,5 +1,5 @@
-name,code,products_categorie,quantity
-kingfisher,1,beer,60
-antiquity blue,2,vadka,90
-black dog,3,vadka,180
-Knock out,4,beer,375
+name,code,products_categorie,quantity,price
+kingfisher,1,beer,60,100
+antiquity blue,2,vadka,90,100
+black dog,3,vadka,180,100
+Knock out,4,beer,375,100

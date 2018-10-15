@@ -8,7 +8,7 @@ python manage.py migrate
 
 python manage.py insert_category
 python manage.py insert_quantity_using_csv
-
+python manage.py insert_products
 
 ALTER SEQUENCE wine_products_categorie_id_seq RESTART WITH 1;
 
