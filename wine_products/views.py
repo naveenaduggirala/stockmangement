@@ -20,7 +20,9 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 		else:
 			print form.errors
 	else:
-		pass
+		form = ProductForm(instance=product_obj)
+	return render_to_response(template_name,
+							  RequestContext(request))
 	
 
 
