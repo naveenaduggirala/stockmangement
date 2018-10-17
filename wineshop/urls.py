@@ -1,10 +1,14 @@
-from django.conf.urls import include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+# from django.conf.urls import (handler400, handler403, handler404, handler500)
+# handler400 = custom_400
+# handler403 = custom_403
+# handler404 = custom_404
+# handler500 = custom_500
 
-urlpatterns = [
-    # Examples:
-    # url(r'^$', 'wineshop.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^admin/', include(admin.site.urls)),
-]
+urlpatterns = patterns('',
+	url(r'^admin/', include(admin.site.urls)),
+    url(r'^wine_products/', include('wine_products.urls')),
+)
