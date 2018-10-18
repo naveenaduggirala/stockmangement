@@ -10,5 +10,5 @@ from django.conf import settings
 
 urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
-    url(r'^wine_products/', include('wine_products.urls')),
+    url(r'^', include('wine_products.urls')),
 )

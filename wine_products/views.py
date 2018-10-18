@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response
 from django.template import Context, Template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, get_backends, authenticate
-from django.template import RequestContext
 # Create your views here.
 
 @login_required
@@ -73,7 +72,7 @@ def user_login(request, template_name="wine_products/login.html"):
 		"form" : form
 	}
 	return render_to_response(template_name,
-							  RequestContext(request, variables))
+							  Context(request, variables))
 
 
 	
