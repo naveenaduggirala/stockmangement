@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     url(r'^products/new/add$', views.product_add, name='product_add'),
     url(r'^products/(?P<id>\d+)/edit$', views.product_add, name='product_edit'),
+    url(r'^login/$', views.user_login , name='login_page'),
 ]
