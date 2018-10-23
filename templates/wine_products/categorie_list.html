@@ -1,0 +1,80 @@
+{%extends home.html%}
+{% block pagetitle %}
+{{page_title}}
+{% endblock %}
+{% block body %}
+<div class="row">
+<div class="col-md-12">
+	<p class="pull-left">
+	<span><a class="btn btn-default" href="{% url 'home' %}"><i class="fa fa-close"></i> Close</a>
+	</span>
+	<span><a class="btn btn-default" href="{% url 'categorie_add' %}"><i class="fa fa-close"></i> Add Categiore</a>
+	</span>
+	</p>
+	</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+	<div class="table-responsive">
+		<table id="data_table" class="table table-striped table-bordered" >
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Label Name
+					</th>
+
+					<th>
+						Date
+					</th>
+					<th>
+						Action
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for each in categorie_list %}
+				<tr>
+					<td>
+						{{each.name}}
+					</td>
+					<td>
+						{{each.label_name}}
+					</td>
+					<td>
+						{{each.created_at}}
+					</td>
+					<td>
+
+						<div class="btn-group" role="group" >
+
+						
+						<a class="btn btn-default btn-sm" href="#"><i class="fa fa-trash"></i></a>
+						</div>
+					</td>
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+	</div>
+</div>	
+</div>
+
+
+{%endblock%}
+
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/dataTables.bootstrap.min.css">
+{%endblock%}
+
+{% block extrajs %}
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#data_table').DataTable();
+} );
+</script>
+{%endblock%}
