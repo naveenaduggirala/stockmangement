@@ -1,3 +1,0 @@
- wine_products/migrations/*
- wine_reports/migrations/*
- *.pyc

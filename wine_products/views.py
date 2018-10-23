@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from .models import Categorie,Qunatite,Product
-from .forms import ProductForm,UserLoginForm
+from .forms import ProductForm,UserLoginForm,CategorieForm
 from django.shortcuts import render_to_response
 from django.template import Context, Template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, get_backends, authenticate
+from django.template import RequestContext
+
 # Create your views here.
 
 @login_required
@@ -37,42 +39,60 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 	return render_to_response(template_name,
 							 Context(request))
 
-def user_login(request, template_name="wine_products/login.html"):
-	if request.method == "POST":
-		print "logins"
-		form = UserLoginForm(request.POST)
-		if form.is_valid():
-			try:
-				user_profile = User.objects.get(username=form.cleaned_data['username'], is_active=True)
-				if not user_profile.check_password(form.cleaned_data['password']):
-					messages.warning(request, 'Invalid Login Details')
-					return HttpResponseRedirect(reverse('login_page'))
-			except User.DoesNotExist as e:
-				messages.warning(request, 'Invalid Login Details')
-				return HttpResponseRedirect(reverse('login_page'))
-			backend = get_backends()[0]
-			user_profile.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
-			login(request, user_profile)
-			try:
-				request.session.pop("prev_logged_in_user")
-			except KeyError as e:
-				pass
-			if request.user.is_superuser:
-				return HttpResponseRedirect(reverse('product_add'))
-			else:
-				pass
-		else:
-			print form.errors
-	else:
-		form = UserLoginForm()
-		logout(request)
+@login_required
+def home(request,template_name="home.html"):
+	return render_to_response(template_name,
+							 RequestContext(request))
 
-	variables = {
-		"page_title": "Login",
-		"form" : form
+
+@login_required
+def categorie_list(request,template_name="wine_products/categorie_list.html"):
+	categorie_list = Categorie.objects.all()
+	categorie_obj_dict={
+	"categorie_list":categorie_list,
+	"page_title":"categories"
 	}
 	return render_to_response(template_name,
-							  Context(request, variables))
+							 RequestContext(request,categorie_obj_dict))
+
+@login_required
+def categorie_add(request,id=None,categorie_obj=None,template_name="wine_products/categorie_add.html"):
+	if id:
+		categorie_obj = get_object_or_404(Product, pk=id)
+		if request.method == 'POST':
+			form = CategorieForm(request.POST, instance=categorie_obj)
+			if form.is_valid():
+				form.save()
+				messages.success(request, 'Categorie details updated.')
+			else:
+				print form.errors
+		else:
+			form = CategorieForm(instance=categorie_obj)
+
+	else:
+		print "new form"
+		if request.method == 'POST':
+			form = CategorieForm(request.POST, instance=categorie_obj)
+			if form.is_valid():
+				form.save()
+				messages.success(request, 'New Categorie saved successfully.')
+			else:
+				print form.errors
+		else:
+			form = CategorieForm(instance=categorie_obj)
+
+	categorie_form_dict={
+	"form":form,
+	"page_title":"Add Categorie",
+	"categorie_obj":categorie_obj
+	}
+
+	return render_to_response(template_name,
+							 RequestContext(request))
+
+
+
+
 
 
 	

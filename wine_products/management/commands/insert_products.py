@@ -1,12 +1,13 @@
 from django.core.management.base import BaseCommand, CommandError
 from wine_products.models import Categorie,Qunatite,Product
+from django.conf import settings
 import csv 
 
 class Command(BaseCommand):
     help = 'read the data from csv and insert into database table'
 
     def handle(self, *args, **options):
-        file_name = "/home/user/projects/stockmangement/media/products/products.csv"
+        file_name = settings.MEDIA_ROOT+"/"+'products'+"/"+'products.csv'
         headers = [] 
         row_data = [] 
         with open(file_name, 'r') as csvfile: 

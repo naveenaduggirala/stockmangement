@@ -8,6 +8,15 @@ class ProductForm(forms.ModelForm):
 		model = Product
 		exclude = ()
 
+class CategorieForm(forms.ModelForm):
+	def __init__(self,*args,**kwargs):
+		super(CategorieForm, self).__init__(*args, **kwargs)
+	class Meta:
+		model = Categorie
+		exclude = ()
+
+
+
 class UserLoginForm(forms.Form):
 	username = forms.CharField(max_length=60,widget=forms.TextInput(attrs={'class': "form-control", 'placeholder': 'Username',}))
 	password = forms.CharField(max_length=60,widget=forms.PasswordInput(attrs={'class': "form-control", 'placeholder': 'Password',}))

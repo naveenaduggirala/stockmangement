@@ -71,8 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.static',
-                'accounts.context_processor.load_site_extras'
+
+                
             ],
         },
     },
@@ -97,11 +97,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'stockmg',
+        'NAME': 'wineshop',
 
-        'USER': 'dhanush',
+        'USER': 'pgesu',
 
-        'PASSWORD': 'dhanush',
+        'PASSWORD': 'error',
 
         'HOST': '127.0.0.1',
 
@@ -127,10 +127,24 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+import os
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, 'static/'),
+)
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = "/home/chinni/projects/cms/media"
+
+MEDIA_ROOT = "/home/chinni/stockmangement/media"
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

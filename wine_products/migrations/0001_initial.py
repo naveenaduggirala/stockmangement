@@ -32,6 +32,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(unique=True, max_length=50)),
                 ('code', models.CharField(max_length=50)),
                 ('label_name', models.CharField(max_length=50, null=True, blank=True)),
+                ('price', models.CharField(max_length=50, null=True, blank=True)),
                 ('products_categorie', models.ForeignKey(blank=True, to='wine_products.Categorie', null=True)),
             ],
             options={
