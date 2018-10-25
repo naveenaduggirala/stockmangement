@@ -9,6 +9,6 @@ urlpatterns = [
     
     url(r'^categorie/list/$', views.categorie_list, name='categorie_list'),
     url(r'^categorie/add/new$', views.categorie_add, name='categorie_add'),
-    url(r'^categorie/(?P<id>\d+)/edit$', views.categorie_list, name='categorie_edit'),
+    url(r'^categorie/(?P<id>\d+)/edit$', views.categorie_add, name='categorie_edit'),
 
 ]

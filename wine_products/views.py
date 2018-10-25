@@ -59,31 +59,25 @@ def categorie_list(request,template_name="wine_products/categorie_list.html"):
 @login_required
 def categorie_add(request,id=None,categorie_obj=None,template_name="wine_products/categorie_add.html"):
 	if id:
-		categorie_obj = get_object_or_404(Product, pk=id)
+		categorie_obj = Categorie.objects.get(pk=id)
 		if request.method == 'POST':
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
 				form.save()
-				messages.success(request, 'Categorie details updated.')
 			else:
 				print form.errors
 		else:
 			form = CategorieForm(instance=categorie_obj)
 
 	else:
-		print "new form"
 		if request.method == 'POST':
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
-				print "form vallid"
 				form.save()
-				print "form save"
-				messages.success(request, 'New Categorie saved successfully.')
 			else:
 				print form.errors
 		else:
 			form = CategorieForm(instance=categorie_obj)
-			print form,"form"
 
 	categorie_form_dict={
 	"form":form,
@@ -91,7 +85,7 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="wine_product
 	"categorie_obj":categorie_obj
 	}
 
-	return render_to_response(template_name,
+	return render_to_response(template_name,categorie_form_dict,
 							 RequestContext(request))
 
 

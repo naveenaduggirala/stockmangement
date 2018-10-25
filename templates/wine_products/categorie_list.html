@@ -25,6 +25,7 @@
         <th>Name</th>
         <th>Label Name</th>
         <th>Created At</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +34,7 @@
         <td>{{categorie_obj.name}}</td>
         <td>{{categorie_obj.label_name}}</td>
         <td>{{categorie_obj.created_at}}</td>
+        <td><a href="{% url 'categorie_edit' categorie_obj.id %}" class="btn btn-default">Edit</a></td>
       </tr>
       {% endfor%}
     </tbody>
