@@ -10,37 +10,6 @@ from django.template import RequestContext
 # Create your views here.
 
 @login_required
-def product_add(request,id=None,product_obj=None,template_name="wine_products/product_add.html"):
-	if id:
-		product_obj = get_object_or_404(Product, pk=id)
-		if request.method == 'POST':
-			form = ProductForm(request.POST, instance=product_obj)
-			if form.is_valid():
-				form.save()
-				messages.success(request, 'Product details updated.')
-			else:
-				print form.errors
-		else:
-			form = ProductForm(instance=product_obj)
-
-	else:
-		print "new form"
-		if request.method == 'POST':
-			form = ProductForm(request.POST, instance=product_obj)
-			if form.is_valid():
-				form.save()
-				messages.success(request, 'New product saved successfully.')
-			else:
-				print form.errors
-		else:
-			form = ProductForm(instance=product_obj)
-			print form,"form"
-
-	
-	return render_to_response(template_name,
-							 Context(request))
-
-@login_required
 def home(request,template_name="home.html"):
 	return render_to_response(template_name,
 							 RequestContext(request))
@@ -88,7 +57,51 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="wine_product
 	return render_to_response(template_name,categorie_form_dict,
 							 RequestContext(request))
 
+@login_required
+def product_list(request,template_name="wine_products/products_list.html"):
+	product_list = Product.objects.all()
+	product_obj_dict={
+	"product_list":product_list,
+	
+	}
+	return render_to_response(template_name,
+							 RequestContext(request,product_obj_dict))
 
+@login_required
+def product_add(request,id=None,product_obj=None,template_name="wine_products/product_add.html"):
+	if id:
+		product_obj = Product.objects.get(pk=id)
+		if request.method == 'POST':
+			form = ProductForm(request.POST, instance=product_obj)
+			if form.is_valid():
+				form.save()
+				messages.success(request, 'Product details updated.')
+			else:
+				print form.errors
+		else:
+			form = ProductForm(instance=product_obj)
+
+	else:
+		print "new form"
+		if request.method == 'POST':
+			form = ProductForm(request.POST, instance=product_obj)
+			if form.is_valid():
+				form.save()
+				messages.success(request, 'New product saved successfully.')
+			else:
+				print form.errors
+		else:
+			form = ProductForm(instance=product_obj)
+			print form,"form"
+
+	product_form_dict ={
+	"form":form,
+	"product_obj":product_obj
+	}
+
+	
+	return render_to_response(template_name,product_form_dict,
+							 Context(request))
 
 
 
