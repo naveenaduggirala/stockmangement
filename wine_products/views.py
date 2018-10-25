@@ -34,6 +34,7 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 				print form.errors
 		else:
 			form = ProductForm(instance=product_obj)
+			print form,"form"
 
 	
 	return render_to_response(template_name,
@@ -74,12 +75,15 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="wine_product
 		if request.method == 'POST':
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
+				print "form vallid"
 				form.save()
+				print "form save"
 				messages.success(request, 'New Categorie saved successfully.')
 			else:
 				print form.errors
 		else:
 			form = CategorieForm(instance=categorie_obj)
+			print form,"form"
 
 	categorie_form_dict={
 	"form":form,

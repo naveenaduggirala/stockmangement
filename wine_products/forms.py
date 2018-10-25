@@ -12,6 +12,12 @@ class CategorieForm(forms.ModelForm):
 	def __init__(self,*args,**kwargs):
 		super(CategorieForm, self).__init__(*args, **kwargs)
 	class Meta:
+		widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'label_name': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}), }
+
 		model = Categorie
 		exclude = ()
 

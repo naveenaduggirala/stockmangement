@@ -43,9 +43,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'wine_products',
     'wine_reports',
+    'crispy_forms',
+
 
 
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

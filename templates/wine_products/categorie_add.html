@@ -1,72 +1,24 @@
-{% block pagetitle %}
-{{page_title}}
-{% endblock %}
-{% block body %}
-<div class="row">
-<div class="col-md-6">
-	<p class="pull-right">
-	<span><a class="btn btn-default" href="{{cancel_url}}"><i class="fa fa-close"></i> Close</a>
-	</span>
-	</p>
-	</div>
-</div>
-<div class="row">
-<div class="col-md-12">
-<form  method="POST" enctype="multipart/form-data" class="fill-up" action="{% url 'categorie_add' %}">{% csrf_token %}
-	<div class="form-group">
-		<div class="row">
-			<div class="col-md-2">
-				<label>{{form.name.label}}</label>
-			</div>
-			<div class="col-md-6">
-				{{form.name}}
-				{{form.name.errors}}
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="row">
-			<div class="col-md-2">
-				<label>{{form.label_name.label}}</label>
-			</div>
-			<div class="col-md-6">
-				{{form.label_name}}
-				{{form.label_name.errors}}
-			</div>
-		</div>
-	</div>
-	
-
-
-	<div class="form-actions col-md-offset-2">
-		<button type="submit" class="btn btn-primary" ><i class="fa fa-save"></i> Save</button>
-		<a  class="btn btn-default" href="{{cancel_url}}"><i class="fa fa-close"></i> Cancel</a>
-	</div>
-	</div>
-
-</form>
-	
-</div>
-</div>
-
-
-
-{%endblock%}
-
-
-{% block extracss %}
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/daterangepicker-bs3.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/datepicker.css" />
-{%endblock%}
-
-{% block extrajs %}
-<script type="text/javascript" src="{{STATIC_URL}}js/moment.min.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/daterangepicker.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/bootstrap-datepicker.js"></script>
-
-
-<script type="text/javascript">
-	$('#id_date').datepicker();
-</script>
-
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>ADD CATEGORIE</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <h5>
+         ADD CATEGORIE
+         <h5>
+         <form method="POST" enctype="multipart/form-data" class="fill-up" action="{% if categorie_obj %}{% url 'categorie_add' categorie_add.id %}{%else%}{% url 'categorie_add' %}{%endif%}">{% csrf_token %}
+             <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+         
+      </div>
+   </body>
+</html>
