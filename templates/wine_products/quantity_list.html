@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Qunatity List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row">
+  <div class="col-md-6">
+    <p class="pull-right">
+      <a href="{% url 'quantity_add'%}" class="btn btn-default">Add Qunatity</a>
+      <a href="{% url 'home'%}" class="btn btn-default">Close</a>
+    </p>
+
+  </div>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Label Name</th>
+        <th>Code</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for quantity_obj in quantity_list%}
+      <tr>
+        <td>{{quantity_obj.name}}</td>
+        <td>{{quantity_obj.label_name}}</td>
+        <td>{{quantity_obj.code}}</td>
+        <td>{{quantity_obj.created_at}}</td>
+        <td><a href="{% url 'quantity_edit' quantity_obj.id %}" class="btn btn-default">Edit</a></td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
