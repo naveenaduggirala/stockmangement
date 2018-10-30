@@ -4,11 +4,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'wineshop',
+        'NAME': 'stockmg',
 
-        'USER': 'pgesu',
+        'USER': 'dhanush',
 
-        'PASSWORD': 'error',
+        'PASSWORD': 'dhanush',
 
         'HOST': '127.0.0.1',
 
@@ -21,4 +21,4 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = "/home/chinni/stockmangement/media"
+MEDIA_ROOT = "/home/user/projects/stockmangement/media"

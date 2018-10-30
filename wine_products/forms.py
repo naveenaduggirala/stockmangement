@@ -21,6 +21,21 @@ class CategorieForm(forms.ModelForm):
 		model = Categorie
 		exclude = ()
 
+class QuantityForm(forms.ModelForm):
+	def __init__(self,*args,**kwargs):
+		super(QuantityForm, self).__init__(*args, **kwargs)
+	class Meta:
+		widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'label_name': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+            'code': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'code'}),
+                                        }
+
+		model = Qunatite
+		exclude = ()
 
 
 class UserLoginForm(forms.Form):

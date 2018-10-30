@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Categorie,Qunatite,Product
-from .forms import ProductForm,UserLoginForm,CategorieForm
+from .forms import ProductForm,UserLoginForm,CategorieForm,QuantityForm
 from django.shortcuts import render_to_response
 from django.template import Context, Template
 from django.contrib.auth.decorators import login_required
@@ -75,7 +75,7 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 			form = ProductForm(request.POST, instance=product_obj)
 			if form.is_valid():
 				form.save()
-				messages.success(request, 'Product details updated.')
+				# messages.success(request, 'Product details updated.')
 			else:
 				print form.errors
 		else:
@@ -87,7 +87,7 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 			form = ProductForm(request.POST, instance=product_obj)
 			if form.is_valid():
 				form.save()
-				messages.success(request, 'New product saved successfully.')
+				# messages.success(request, 'New product saved successfully.')
 			else:
 				print form.errors
 		else:
@@ -101,11 +101,43 @@ def product_add(request,id=None,product_obj=None,template_name="wine_products/pr
 
 	
 	return render_to_response(template_name,product_form_dict,
-							 Context(request))
+							 RequestContext(request))
+
+@login_required
+def quantity_list(request,template_name="wine_products/quantity_list.html"):
+	quantity_obj_list = Qunatite.objects.all()
+	quantity_list_dict ={
+	"quantity_list":quantity_obj_list
+	}
+	return render_to_response(template_name,quantity_list_dict,RequestContext(request))
+
+
+def quantity_add(request,id=None,qunatite_obj=None,template_name="wine_products/quantity_add.html"):
+	if id:
+		qunatite_obj = Qunatite.objects.get(pk=id)
+		print "id"
+		print qunatite_obj,"qunatite_obj"
+	if request.method == 'POST':
+		form = QuantityForm(request.POST,instance=qunatite_obj)
+		print form,"form"
+		if form.is_valid():
+			form.save()
+		else:
+			print form.errors
+	else:
+		form = QuantityForm(instance=qunatite_obj)
+		print form,"form"
+
+	qunatity_form_dict ={
+	"form":form,
+	"qunatite_obj":qunatite_obj
+	}
+
+	return render_to_response(template_name,qunatity_form_dict,RequestContext(request))
 
 
 
 
-	
+
 
 

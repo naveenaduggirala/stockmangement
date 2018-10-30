@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>ADD CATEGORIE</title>
+      <title>ADD QUANTITY</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,10 +11,9 @@
    <body>
       <div class="container">
          <h5>
-         ADD PRODUCT
+         ADD QUANTITY
          <h5>
-         <form method="POST" enctype="multipart/form-data" class="fill-up" action="{% if product_obj %}{% url 'product_edit' product_obj.id %}{%else%}{% url 'product_add' %}{%endif%}">
-          {% csrf_token %}
+         <form method="POST" enctype="multipart/form-data" class="fill-up" action="{% if product_obj %}{% url 'product_edit' product_obj.id %}{%else%}{% url 'product_add' %}{%endif%}">{% csrf_token %}
              <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
