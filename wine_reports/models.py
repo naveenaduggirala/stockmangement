@@ -1,5 +1,4 @@
 from django.db import models
-# from products.base import BaseModel
 from wine_products.models import Categorie,Qunatite,Product
 from wine_products.base import BaseModel
 
