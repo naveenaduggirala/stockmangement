@@ -9,7 +9,8 @@ class Stock(BaseModel):
 	categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE)
 	products = models.ForeignKey(Product, on_delete=models.CASCADE)
 	qunatity = models.ForeignKey(Qunatite, on_delete=models.CASCADE)
-	stoct_of_products = models.IntegerField()
+	stoct_of_products = models.CharField(max_length=100,blank=True,null=True)
+	cl_op_balance = models.CharField(max_length=100,blank=True,null=True)
 	def __str__(self):
 		return '%s' % self.products
 
