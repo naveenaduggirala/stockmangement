@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^', include('wine_products.urls')),
+    url(r'^', include('products.urls')),
    
 
 )

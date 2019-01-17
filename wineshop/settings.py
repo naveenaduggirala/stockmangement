@@ -41,8 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wine_products',
-    'wine_reports',
+    'products',
+    'reports',
     'crispy_forms',
 
 
