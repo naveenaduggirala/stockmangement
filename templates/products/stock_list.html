@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- <div class="row">
+  <div class="col-md-6">
+    <p class="pull-right">
+      <a href="{% url 'product_add'%}" class="btn btn-default">Add Products</a>
+      <a href="{% url 'home'%}" class="btn btn-default">Close</a>
+    </p>
+
+  </div>
+</div> -->
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Label Name</th>
+        <th>Categorie Name</th>
+        <th>Quantity</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product_obj in product_list%}
+      <tr>
+        <td>{{product_obj.name}}</td>
+        <td>{{product_obj.code}}</td>
+        <td>{{product_obj.label_name}}</td>
+        <td>{{product_obj.products_categorie.name}}</td>
+        <td>{{product_obj.quantity.name}}</td>
+        <td>{{product_obj.price}}</td>
+        <td><a href="{% url 'product_edit' product_obj.id %}" class="btn btn-default">Edit</a></td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
