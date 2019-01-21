@@ -160,6 +160,6 @@ def stock_list(request,template_name="products/stock_list.html"):
 	stock_obj_dict={
 	"stock_obj":stock_obj_list
 	}
-	return render_to_response(template_name,stock_obj,RequestContext(request))
+	return render_to_response(template_name,stock_obj_dict,RequestContext(request))
 
 

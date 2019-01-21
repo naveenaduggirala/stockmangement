@@ -146,7 +146,7 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = "/home/chinni/stockmangement/media"
+MEDIA_ROOT = "/home/user/projects/stockmangement/media"
 
 try:
     from local_settings import *
