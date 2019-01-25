@@ -53,4 +53,4 @@ class StockForm(forms.ModelForm):
 		super(StockForm, self).__init__(*args, **kwargs)
 	class Meta:
 		model = Stock
-		exclude = ()
+		exclude = ('stock_receive_date',)

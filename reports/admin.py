@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Stock,Report
+from .models import Stock,DailyMasters
 
 
 class StockAdmin(admin.ModelAdmin):
@@ -16,4 +16,4 @@ class StockAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Stock)
-admin.site.register(Report)
+admin.site.register(DailyMasters)

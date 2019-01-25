@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, get_backends, authenticate
 from django.template import RequestContext
 
+
 # Create your views here.
 
 @login_required
@@ -142,7 +143,24 @@ def stock_add(request,id=None,stock_obj=None,template_name="products/stock_add.h
 	if request.method == 'POST':
 		form = StockForm(request.POST,instance=stock_obj)
 		if form.is_valid():
-			form.save()
+			stock_obj = form.save()
+			kwargs = {
+					  "categorie":stock_obj.categorie,
+					  "products":stock_obj.products,
+					  "qunatity":stock_obj.qunatity
+					  }
+			try:
+				da_ma_obj = DailyMasters.objects.get(**kwargs)
+				da_ma_obj.opening_balance = da_ma_obj.opening_balance+stock_obj.stock
+				da_ma_obj.closing_balance = da_ma_obj.closing_balance+stock_obj.stock
+				da_ma_obj.save()
+			except DailyMasters.DoesNotExist as e:
+				print "hi"
+				da_ma_obj = DailyMasters.objects.create(categorie=stock_obj.categorie,products=stock_obj.products,qunatity=stock_obj.qunatity,opening_balance=stock_obj.stock,closing_balance=stock_obj.stock)
+
+
+
+			
 		else:
 			print form.errors
 	else:
