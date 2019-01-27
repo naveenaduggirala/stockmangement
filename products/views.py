@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Categorie,Qunatite,Product
 from reports.models import *
-from .forms import ProductForm,UserLoginForm,CategorieForm,QuantityForm,StockForm
+from .forms import ProductForm,UserLoginForm,CategorieForm,QuantityForm,StockForm,SalesForm
 from django.shortcuts import render_to_response
 from django.template import Context, Template
 from django.contrib.auth.decorators import login_required
@@ -155,12 +155,7 @@ def stock_add(request,id=None,stock_obj=None,template_name="products/stock_add.h
 				da_ma_obj.closing_balance = da_ma_obj.closing_balance+stock_obj.stock
 				da_ma_obj.save()
 			except DailyMasters.DoesNotExist as e:
-				print "hi"
 				da_ma_obj = DailyMasters.objects.create(categorie=stock_obj.categorie,products=stock_obj.products,qunatity=stock_obj.qunatity,opening_balance=stock_obj.stock,closing_balance=stock_obj.stock)
-
-
-
-			
 		else:
 			print form.errors
 	else:
@@ -173,6 +168,7 @@ def stock_add(request,id=None,stock_obj=None,template_name="products/stock_add.h
 	return render_to_response(template_name,stock_form_dict,RequestContext(request))
 
 
+@login_required
 def stock_list(request,template_name="products/stock_list.html"):
 	stock_obj_list = Stock.objects.all()
 	stock_obj_dict={
@@ -180,4 +176,52 @@ def stock_list(request,template_name="products/stock_list.html"):
 	}
 	return render_to_response(template_name,stock_obj_dict,RequestContext(request))
 
+@login_required
+def sales_list(request,template_name="products/sales_list.html"):
+	daily_sales_obj_list = DailySales.objects.all()
+	daily_sales_obj_dict={
+	"daily_sales_obj":daily_sales_obj_list
+	}
+	return render_to_response(template_name,daily_sales_obj_dict,RequestContext(request))
+
+@login_required
+def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.html"):
+	if id:
+		sales_obj = DailySales.objects.get(pk=id)
+	if request.method == 'POST':
+		form = SalesForm(request.POST,instance=sales_obj)
+		if form.is_valid():
+			sales_obj = form.save()
+			kwargs = {
+					  "categorie":sales_obj.categorie,
+					  "products":sales_obj.products,
+					  "qunatity":sales_obj.qunatity
+					  }
+			try:
+				da_ma_obj = DailyMasters.objects.get(**kwargs)
+				da_ma_obj.opening_balance = da_ma_obj.opening_balance-int(sales_obj.count)
+				da_ma_obj.closing_balance = da_ma_obj.closing_balance-int(sales_obj.count)	
+				da_ma_obj.save()
+			except DailyMasters.DoesNotExist as e:
+				print (e)
+		else:
+			print form.errors
+	else:
+		form = SalesForm(instance=sales_obj)
+
+	sales_form_dict = {
+	"form":form,
+	"sales_obj":sales_obj
+	}
+	return render_to_response(template_name,sales_form_dict,RequestContext(request))
+
+
+
+@login_required
+def masters_list(request,template_name="products/stock_details.html"):
+	stock_deatils_list = DailyMasters.objects.all()
+	stock_deatils_dict={
+	"stock_deatils_list":stock_deatils_list
+	}
+	return render_to_response(template_name,stock_deatils_dict,RequestContext(request))
 

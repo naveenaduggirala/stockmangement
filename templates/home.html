@@ -11,18 +11,20 @@ body {font-family: "Roboto", sans-serif}
 
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;" id="mySidebar">
   <a class="w3-bar-item w3-button w3-teal" href="#">Home</a>
-  <a class="w3-bar-item w3-button" href="{% url 'categorie_list' %}">Categories</a>
-  <a class="w3-bar-item w3-button" href="{% url 'quantity_list' %}">Quantites</a>
-  <a class="w3-bar-item w3-button" href="{% url 'product_list' %}">Products</a>
-  <a class="w3-bar-item w3-button" href="{% url 'stock_list' %}">Stock</a>
-  <a class="w3-bar-item w3-button" href="#">Daily Report</a>
-  <div>
+  <a class="w3-bar-item w3-button" href="{% url 'categorie_list' %}">ADD CATEGORIES</a>
+  <a class="w3-bar-item w3-button" href="{% url 'quantity_list' %}">ADD QUANTITIES</a>
+  <a class="w3-bar-item w3-button" href="{% url 'product_list' %}">ADD PRODUCTS</a>
+  <a class="w3-bar-item w3-button" href="{% url 'stock_list' %}">ADD STOCK</a>
+  <a class="w3-bar-item w3-button" href="{% url 'masters_list'%}">STOCK DETAILS</a>
+  <a class="w3-bar-item w3-button" href="{% url 'sales_list' %}">SELL PRODUCTS</a>
+
+  <!-- <div>
     <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">Dropdown <i class="fa fa-caret-down"></i></a>
     <div id="demo" class="w3-hide ">
       <a class="w3-bar-item w3-button" href="#">Link</a>
       <a class="w3-bar-item w3-button" href="#">Link</a>
       <a class="w3-bar-item w3-button" href="#">Link</a>
     </div>
-  </div>
+  </div> -->
   <a class="w3-bar-item w3-button" href="{% url 'logout_user' %}">Logout</a>
 </nav>     

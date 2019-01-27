@@ -24,6 +24,11 @@ urlpatterns = [
     url(r'^stock/add/new$', views.stock_add, name='stock_add'),
     url(r'^stock/(?P<id>\d+)/edit$', views.stock_add, name='stock_edit'),
 
+    url(r'^sales/list$', views.sales_list, name='sales_list'),
+    url(r'^sales/add/new$', views.sales_add, name='sales_add'),
+    url(r'^sales/(?P<id>\d+)/edit$', views.stock_add, name='sales_edit'),
+
+    url(r'^masters/list$', views.masters_list, name='masters_list'),
 
     
    
