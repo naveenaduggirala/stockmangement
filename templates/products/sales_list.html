@@ -26,16 +26,18 @@
         <th>categorie</th>
         <th>products</th>
         <th>qunatity</th>
-        <th>count</th>
+        <th>Saled Count</th>
+        <th>Saled On</th>
       </tr>
     </thead>
     <tbody>
-      {% for stock in stock_obj%}
+      {% for sales in daily_sales_obj%}
       <tr>
-        <td>{{stock.categorie.name}}</td>
-        <td>{{stock.products.name}}</td>
-        <td>{{stock.qunatity.name}}</td>
-        <td>{{stock.stock}}</td>
+        <td>{{sales.categorie.name}}</td>
+        <td>{{sales.products.name}}</td>
+        <td>{{sales.qunatity.name}}</td>
+        <td>{{sales.count}}</td>
+        <td>{{sales.created_at}}</td>
       </tr>
       {% endfor%}
     </tbody>

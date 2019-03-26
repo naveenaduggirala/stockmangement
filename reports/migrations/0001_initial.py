@@ -34,7 +34,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('count', models.CharField(max_length=100, null=True, blank=True)),
-                ('amount', models.CharField(max_length=100, null=True, blank=True)),
                 ('categorie', models.ForeignKey(to='products.Categorie')),
                 ('products', models.ForeignKey(to='products.Product')),
                 ('qunatity', models.ForeignKey(to='products.Qunatite')),

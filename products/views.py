@@ -7,6 +7,7 @@ from django.template import Context, Template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, get_backends, authenticate
 from django.template import RequestContext
+from django.contrib import messages
 
 
 # Create your views here.
@@ -40,6 +41,9 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="products/cat
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
 				form.save()
+				messages.success(request, 'categories added successfully')
+
+
 			else:
 				print form.errors
 		else:
