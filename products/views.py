@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponseRedirect
+from django.core.urlresolvers import resolve,reverse
 from .models import Categorie,Qunatite,Product
 from reports.models import *
 from .forms import ProductForm,UserLoginForm,CategorieForm,QuantityForm,StockForm,SalesForm
@@ -41,9 +42,8 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="products/cat
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
 				form.save()
-				messages.success(request, 'categories added successfully')
-
-
+				messages.success(request, 'Categorie edited successfully')
+				return HttpResponseRedirect(reverse('categorie_list'))
 			else:
 				print form.errors
 		else:
@@ -54,6 +54,9 @@ def categorie_add(request,id=None,categorie_obj=None,template_name="products/cat
 			form = CategorieForm(request.POST, instance=categorie_obj)
 			if form.is_valid():
 				form.save()
+				messages.success(request, 'Categorie added successfully')
+				return HttpResponseRedirect(reverse('categorie_list'))
+
 			else:
 				print form.errors
 		else:

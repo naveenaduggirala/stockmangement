@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.contrib.messages import constants as messages
+
+
+
 
 
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = (
     'products',
     'reports',
     'crispy_forms',
+    
 
 
 
@@ -65,6 +70,9 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'wineshop.urls'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,7 +91,13 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'wineshop.wsgi.application'
+
+
+
+
 
 
 # Database
@@ -117,7 +131,13 @@ DATABASES = {
 }
 
 
-
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
