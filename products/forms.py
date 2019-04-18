@@ -68,6 +68,17 @@ class StockForm(forms.ModelForm):
 	def __init__(self,*args,**kwargs):
 		super(StockForm, self).__init__(*args, **kwargs)
 	class Meta:
+		widgets = {
+            'categorie': forms.Select(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'products': forms.Select(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+            'qunatity': forms.Select(attrs={'class': 'form-control',
+                                         'placeholder': 'code'}),
+            'stock': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'code'}),
+
+                                        }
 		model = Stock
 		exclude = ('stock_receive_date',)
 
@@ -75,6 +86,18 @@ class SalesForm(forms.ModelForm):
 	def __init__(self,*args,**kwargs):
 		super(SalesForm, self).__init__(*args, **kwargs)
 	class Meta:
+		widgets = {
+            'categorie': forms.Select(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'products': forms.Select(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+            'qunatity': forms.Select(attrs={'class': 'form-control',
+                                         'placeholder': 'code'}),
+            'count': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'code'}),
+
+                                        }
+                                        
 		model = DailySales
 		exclude = ('amount',)
 		

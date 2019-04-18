@@ -12,3 +12,7 @@ python manage.py insert_products
 
 ALTER SEQUENCE products_categorie_id_seq RESTART WITH 1;
 
+
+
+
+#save stock recived date internally

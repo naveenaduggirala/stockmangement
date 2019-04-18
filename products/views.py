@@ -182,6 +182,12 @@ def stock_add(request,id=None,stock_obj=None,template_name="products/stock_add.h
 				da_ma_obj = DailyMasters.objects.create(categorie=stock_obj.categorie,products=stock_obj.products,qunatity=stock_obj.qunatity,opening_balance=stock_obj.stock,closing_balance=stock_obj.stock)
 		else:
 			print form.errors
+
+		if not id:
+			messages.success(request,"Stock added successfully")
+		else:
+			messages.success(request,"Stock edited successfully")
+		return HttpResponseRedirect(reverse('stock_list'))
 	else:
 		form = StockForm(instance=stock_obj)
 
@@ -230,6 +236,12 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 				print (e)
 		else:
 			print form.errors
+
+		if not id:
+			messages.success(request,"Product saled successfully")
+		else:
+			messages.success(request,"Product saled edited successfully")
+		return HttpResponseRedirect(reverse('sales_list'))
 	else:
 		form = SalesForm(instance=sales_obj)
 

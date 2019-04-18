@@ -3,7 +3,7 @@
 
       <div class="container">
          <h5>
-         ADD STOCk
+         ADD STOCK
          <h5>
          <form method="POST" enctype="multipart/form-data" class="fill-up" action="{% if stock_obj %}{% url 'stock_edit' stock_obj.id %}{%else%}{% url 'stock_add' %}{%endif%}">{% csrf_token %}
              <form method="POST" class="post-form">{% csrf_token %}
