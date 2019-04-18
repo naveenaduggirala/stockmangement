@@ -89,9 +89,17 @@ def product_add(request,id=None,product_obj=None,template_name="products/product
 			form = ProductForm(request.POST, instance=product_obj)
 			if form.is_valid():
 				form.save()
-				# messages.success(request, 'Product details updated.')
 			else:
 				print form.errors
+			
+			if not id:
+				messages.success(request, 'Product details edited successfully.')
+			else:
+				messages.success(request, 'Product details saved successfully.')
+
+			return HttpResponseRedirect(reverse('product_list'))
+
+
 		else:
 			form = ProductForm(instance=product_obj)
 
@@ -100,7 +108,8 @@ def product_add(request,id=None,product_obj=None,template_name="products/product
 			form = ProductForm(request.POST, instance=product_obj)
 			if form.is_valid():
 				form.save()
-				# messages.success(request, 'New product saved successfully.')
+				messages.success(request, 'New product saved successfully.')
+				return HttpResponseRedirect(reverse('categorie_list'))
 			else:
 				print form.errors
 		else:
@@ -133,6 +142,14 @@ def quantity_add(request,id=None,qunatite_obj=None,template_name="products/quant
 			form.save()
 		else:
 			print form.errors
+
+		if not id:
+			messages.success(request, 'Qunatite created successfully')
+		else:
+			messages.success(request, 'Qunatite edited successfully')
+		return HttpResponseRedirect(reverse('quantity_list'))
+
+
 	else:
 		form = QuantityForm(instance=qunatite_obj)
 

@@ -6,6 +6,22 @@ class ProductForm(forms.ModelForm):
 	def __init__(self,*args,**kwargs):
 		super(ProductForm, self).__init__(*args, **kwargs)
 	class Meta:
+		widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'label_name': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+            'code': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'products_categorie': forms.Select(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+            'quantity': forms.Select(attrs={'class': 'form-control',
+                                           'placeholder': 'Name'}),
+            'price': forms.TextInput(attrs={'class': 'form-control',
+                                         'placeholder': 'label name'}),
+
+
+                                          }
 		model = Product
 		exclude = ()
 
