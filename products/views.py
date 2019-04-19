@@ -221,27 +221,56 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 	if request.method == 'POST':
 		form = SalesForm(request.POST,instance=sales_obj)
 		if form.is_valid():
-			sales_obj = form.save()
+			#validation for selling products based on stock
+			categorie = form.cleaned_data['categorie']
+			products = form.cleaned_data['products']
+			qunatity = form.cleaned_data['qunatity']
+
 			kwargs = {
-					  "categorie":sales_obj.categorie,
-					  "products":sales_obj.products,
-					  "qunatity":sales_obj.qunatity
-					  }
+					"categorie":categorie,
+					"products":products,
+					"qunatity":qunatity
+					}
 			try:
 				da_ma_obj = DailyMasters.objects.get(**kwargs)
+			except DailyMasters.DoesNotExist as e:
+				print (e)
+
+			to_sell_count = form.cleaned_data['count']
+
+			if to_sell_count > da_ma_obj.opening_balance:
+				messages.warning(request,"Unable to sell the product.Your stock is insufficent")
+				return HttpResponseRedirect(reverse('sales_add'))
+			else:
+				sales_obj = form.save()
+
+				# kwargs = {
+				# 		  "categorie":sales_obj.categorie,
+				# 		  "products":sales_obj.products,
+				# 		  "qunatity":sales_obj.qunatity
+				# 		  }
+				# try:
+				# 	da_ma_obj = DailyMasters.objects.get(**kwargs)
+				# 	da_ma_obj.opening_balance = da_ma_obj.opening_balance-int(sales_obj.count)
+				# 	da_ma_obj.closing_balance = da_ma_obj.closing_balance-int(sales_obj.count)	
+				# 	da_ma_obj.save()
+				# except DailyMasters.DoesNotExist as e:
+				# 	print (e)
+
 				da_ma_obj.opening_balance = da_ma_obj.opening_balance-int(sales_obj.count)
 				da_ma_obj.closing_balance = da_ma_obj.closing_balance-int(sales_obj.count)	
 				da_ma_obj.save()
-			except DailyMasters.DoesNotExist as e:
-				print (e)
+				print "saved"
+
+			if not id:
+				messages.success(request,"Product saled successfully")
+			else:
+				messages.success(request,"Product saled edited successfully")
+				return HttpResponseRedirect(reverse('sales_list'))
 		else:
 			print form.errors
 
-		if not id:
-			messages.success(request,"Product saled successfully")
-		else:
-			messages.success(request,"Product saled edited successfully")
-		return HttpResponseRedirect(reverse('sales_list'))
+		
 	else:
 		form = SalesForm(instance=sales_obj)
 
