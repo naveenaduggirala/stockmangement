@@ -237,8 +237,8 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 				print (e)
 
 			to_sell_count = form.cleaned_data['count']
-
-			if to_sell_count > da_ma_obj.opening_balance:
+			
+			if int(to_sell_count) > da_ma_obj.opening_balance:
 				messages.warning(request,"Unable to sell the product.Your stock is insufficent")
 				return HttpResponseRedirect(reverse('sales_add'))
 			else:
@@ -265,7 +265,7 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 				messages.success(request,"Product saled successfully")
 			else:
 				messages.success(request,"Product saled edited successfully")
-				return HttpResponseRedirect(reverse('sales_list'))
+			return HttpResponseRedirect(reverse('sales_list'))
 		else:
 			print form.errors
 
