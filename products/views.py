@@ -260,7 +260,6 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 				da_ma_obj.opening_balance = da_ma_obj.opening_balance-int(sales_obj.count)
 				da_ma_obj.closing_balance = da_ma_obj.closing_balance-int(sales_obj.count)	
 				da_ma_obj.save()
-				print "saved"
 
 			if not id:
 				messages.success(request,"Product saled successfully")
