@@ -30,6 +30,7 @@ class DailySales(BaseModel):
 	products = models.ForeignKey(Product, on_delete=models.CASCADE)
 	qunatity = models.ForeignKey(Qunatite, on_delete=models.CASCADE)
 	count = models.CharField(max_length=100,blank=True,null=True)
+	soled_on = models.DateField(blank=True,null=True)
 
 	def __str__(self):
 		return '%s' % self.products

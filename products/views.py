@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, get_backends, authenticate
 from django.template import RequestContext
 from django.contrib import messages
-
+from datetime import date
 
 # Create your views here.
 
@@ -243,6 +243,8 @@ def sales_add(request,id=None,sales_obj=None,template_name="products/sales_add.h
 				return HttpResponseRedirect(reverse('sales_add'))
 			else:
 				sales_obj = form.save()
+				sales_obj.soled_on = date.today()
+				sales_obj.save()
 
 				# kwargs = {
 				# 		  "categorie":sales_obj.categorie,

@@ -99,5 +99,5 @@ class SalesForm(forms.ModelForm):
                                         }
                                         
 		model = DailySales
-		exclude = ('amount',)
+		exclude = ('soled_on',)
 		

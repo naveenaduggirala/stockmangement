@@ -12,7 +12,7 @@ class DailyReport():
 	def generate_daily_report(self):
 		today = date.today()
 		print today
-		today_sales_list = DailySales.objects.filter(created_at=today)
+		today_sales_list = DailySales.objects.filter(soled_on=today).values('categorie','products','qunatity','count','soled_on')
 		print today_sales_list
 		
 
