@@ -25,11 +25,14 @@ class DailyReport():
 			categorie_obj = Categorie.objects.get(pk=each['categorie'])
 			product_obj = Product.objects.get(pk=each['products'])
 			qunatity_obj = Qunatite.objects.get(pk=each['qunatity'])
+			total_price = (int(each['count'])) * (int(product_obj.price))
+			
 			kwargs = {
 			"categorie":categorie_obj.name,
 			"products":product_obj.name,
 			"qunatity":qunatity_obj.name,
 			"count":each['count'],
+			"price":total_price,
 			"soled_on":each['soled_on']
 
 			}
@@ -38,10 +41,10 @@ class DailyReport():
 		return self.final_list
 
 	def generate_csv(self):
-		self.filename = "/home/chinni/Desktop/daily_report.csv"
+		self.filename = "/home/user/Desktop/daily_report.csv"
 		self.generate_daily_report()
 
-		headers = ['categorie','products','qunatity','count','soled_on'] 
+		headers = ['categorie','products','qunatity','count','price','soled_on'] 
 
 		with open(self.filename, 'w') as csvfile: 
 			# creating a csv dict writer object 
@@ -88,5 +91,5 @@ if __name__ == '__main__':
 	da_rep_obj = DailyReport()
 	da_rep_obj.generate_daily_report()
 	da_rep_obj.generate_csv()
-	da_rep_obj.send_mail_alert("/home/chinni/Desktop/daily_report.csv")
+	# da_rep_obj.send_mail_alert("/home/user/Desktop/daily_report.csv")
 
